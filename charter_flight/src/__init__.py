@@ -33,10 +33,11 @@ def create_app(test_config=None):
     migrate = Migrate(app, db)
 
     # Registering the blueprints
-    from .routes import customers, charters, aircrafts, pilots, home
+    from .routes import customers, charters, aircrafts, pilots, home, calendar
     app.register_blueprint(customers.bp)
     app.register_blueprint(charters.bp)
     app.register_blueprint(aircrafts.bp)
     app.register_blueprint(pilots.bp)
     app.register_blueprint(home.bp)
+    app.register_blueprint(calendar.bp)
     return app
