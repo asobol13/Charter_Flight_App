@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, abort, request
-from ..models import Charter, db, Customer, Aircraft, Pilot
+from ..models import Charter, db
 
 # Creating blueprint
 bp = Blueprint('charters', __name__, url_prefix='/charters')
