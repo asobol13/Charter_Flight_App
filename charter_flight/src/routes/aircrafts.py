@@ -58,7 +58,11 @@ def update(tail_number):
         'aircraft_name' not in request.json and
         'hourly_rate' not in request.json and 
         'wait_time_rate' not in request.json and
-        'capacity' not in request.json):
+        'capacity' not in request.json and
+        'maintenance_date' not in request.json and
+        'fuel_load' not in request.json and
+        'fuel_type' not in request.json and
+        'aircraft_notes' not in request.json):
         return abort(400)
 
     if 'aircraft_name' in request.json:
@@ -69,6 +73,14 @@ def update(tail_number):
         a.wait_time_rate = request.json['wait_time_rate']
     if 'capacity' in request.json:
         a.capacity = request.json['capacity']
+    if 'maintenance_date' in request.json:
+        a.maintenance_date = request.json['maintenance_date']
+    if 'fuel_load' in request.json:
+        a.fuel_load = request.json['fuel_load']
+    if 'fuel_type' in request.json:
+        a.fuel_type = request.json['fuel_type']
+    if 'aircraft_notes' in request.json:
+        a.aircraft_notes = request.json['aircraft_notes']
 
     try:
         db.session.commit() # Preparing to update statement

@@ -75,12 +75,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="g in get" :key="g.tail_number">
-          <th scope="row">{{ g.tail_number }}</th>
-          <td>{{ g.aircraft_name }}</td>
-          <td>{{ g.capacity }}</td>
-          <td>{{ g.hourly_rate }}</td>
-          <td>{{ g.wait_time_rate }}</td>
+        <tr v-for="p in post" :key="p.tail_number">
+          <th scope="row">{{ p.tail_number }}</th>
+          <td>{{ p.aircraft_name }}</td>
+          <td>{{ p.capacity }}</td>
+          <td>{{ p.hourly_rate }}</td>
+          <td>{{ p.wait_time_rate }}</td>
         </tr>
       </tbody>
     </table>
@@ -91,7 +91,7 @@
 export default {
   data() {
     return {
-      get: [],
+      post: [],
     };
   },
 
@@ -99,7 +99,7 @@ export default {
     getInfo() {
       fetch("http://localhost:5000/aircrafts")
         .then((response) => response.json())
-        .then((data) => (this.get = data));
+        .then((data) => (this.post = data));
     },
   },
   mounted() {

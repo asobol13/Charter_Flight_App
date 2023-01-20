@@ -115,6 +115,9 @@
         </tr>
       </tbody>
     </table>
+    <div v-for="p in post" :key="p.account_number">
+      <h2>{{ p.account_number }} - {{ p.name }}</h2>
+    </div>
   </div>
 </template>
 
@@ -124,7 +127,7 @@ export default {
   name: "CustomersView",
   data() {
     return {
-      msg: "This is the customers page...",
+      post: [],
     };
   },
   methods: {
@@ -134,7 +137,7 @@ export default {
         .get(path)
         .then((res) => {
           console.log(res.data);
-          this.msg = res.data;
+          this.post = res.data;
         })
         .catch((err) => {
           console.error(err);

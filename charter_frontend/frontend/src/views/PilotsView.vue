@@ -63,14 +63,11 @@
         </div>
       </div>
     </div>
-    <!-- Creating a table -->
-    <h1>This loads data</h1>
-    <div v-for="post in posts" v-bind:key="post.pilot_id">
-      <h2>{{ post.pilot_name }}</h2>
-      <h2>{{ post.pilot_id }}</h2>
-      <h2>{{ post.hourly_rate }}</h2>
-      <h2>{{ post.wait_time_rate }}</h2>
-    </div>
+    <!-- Creating a button -->
+    <h1>Pilot Info</h1>
+    <!--<div v-for="p in pilots" :key="p.pilot_id">
+      <h2>{{ p.pilot_id }} - {{ p.pilot_name }}</h2>
+    </div>-->
   </div>
 </template>
 
@@ -78,22 +75,18 @@
 export default {
   data() {
     return {
-      posts: [],
+      pilots: [],
     };
   },
   methods: {
-    async getData() {
-      try {
-        let response = await fetch("http://localhost:5000/pilots");
-        //JSON responses are automatically parsed
-        this.posts = await response.json();
-      } catch (error) {
-        console.log(error);
-      }
+    index() {
+      fetch("https://localhost:5000/pilots")
+        .then((response) => response.json())
+        .then((data) => (this.pilots = data));
     },
   },
-  created() {
-    this.getData();
+  mounted() {
+    this.index();
   },
 };
 </script>

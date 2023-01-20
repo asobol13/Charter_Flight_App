@@ -96,15 +96,23 @@ class Aircraft(db.Model):
     hourly_rate = db.Column(db.String(10), nullable=False)
     wait_time_rate = db.Column(db.String(10), nullable=False)
     capacity = db.Column(db.Integer, nullable=False)
+    maintenance_date = db.Column(db.String(255), nullable=True)
+    fuel_load = db.Column(db.String(255), nullable=True)
+    fuel_type = db.Column(db.String(255), nullable=True)
+    aircraft_notes = db.Column(db.String(500), nullable=True)
 
     # Initializing the aircrafts table
     def __init__(self, tail_number:str, aircraft_name:str, hourly_rate:int, wait_time_rate:int,
-    capacity:int):
+    capacity:int, maintenance_date:str, fuel_load:str, fuel_type:str, aircraft_notes:str):
         self.tail_number = tail_number
         self.aircraft_name = aircraft_name
         self.hourly_rate = hourly_rate
         self.wait_time_rate = wait_time_rate
         self.capacity = capacity
+        self.maintenance_date = maintenance_date
+        self.fuel_load = fuel_load
+        self.fuel_type = fuel_type
+        self.aircraft_notes = aircraft_notes
 
     # Returning aircrafts table into JSON
     def serialize(self):
@@ -113,7 +121,11 @@ class Aircraft(db.Model):
             'aircraft_name': self.aircraft_name,
             'hourly_rate': self.hourly_rate,
             'wait_time_rate': self.wait_time_rate,
-            'capacity': self.capacity
+            'capacity': self.capacity,
+            'maintenance_date': self.maintenance_date,
+            'fuel_load': self.fuel_load,
+            'fuel_type':self.fuel_type,
+            'aircraft_notes':self.aircraft_notes
         }
 
 # Setting up the class for pilots table
