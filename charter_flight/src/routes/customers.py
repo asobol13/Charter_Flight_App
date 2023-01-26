@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, abort, request
+from flask import Blueprint, jsonify, abort, request, render_template
 from ..models import Customer, db
 import hashlib
 import secrets
@@ -11,6 +11,11 @@ def scramble(password:str):
 
 # Creating blueprint
 bp = Blueprint('customers', __name__, url_prefix='/customers')
+
+# Getting the template customers.html
+@bp.route('', methods=['GET'])
+def addcustomer():
+    return render_template('customers.html')
 
 # Index of customers
 @bp.route('', methods=['GET'])
