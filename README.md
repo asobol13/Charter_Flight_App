@@ -7,7 +7,7 @@ This application is meant to serve as a tool for private aviation businesses to 
 ***
 ### Technologies
 ***
-This application was created with the use of Python, Flask, SQLAlchemy, Docker, and Postgres.
+This application was created with the use of Python, Flask, SQLAlchemy, alembic, Docker, and Postgres.
 
 ***
 ### Installations
