@@ -55,3 +55,18 @@ body{
     flex: 1 1 auto;
     padding: 1.5rem 1.5rem;
 }
+
+/* Calendar.html */
+
+/* Calendar Styling */
+#calendar {
+    float: left;
+    padding: 50px;
+}
+
+/* Sticky notes */
+#stickynotes {
+    padding: 20px;
+    float: right;
+    
+}
