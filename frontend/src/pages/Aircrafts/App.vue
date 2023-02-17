@@ -1,7 +1,7 @@
 <template>
     <header class="nav-bar">
       <div class="menu-item">
-          <a href="HomePage.vue">Customers</a>
+          <a href="HomePage.vue">Home</a>
       </div>
       <div class="menu-item">
           <a href="CustomersPage.vue">Customers</a>
@@ -17,19 +17,13 @@
       </div>
   </header>
 
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HomePage msg="Welcome to MyFlight!"/>
+  <h1>This is the Aircrafts Page</h1>
 </template>
 
 <script>
-import HomePage from './components/HomePage.vue'
-import CustomersPage from './components/CustomersPage.vue'
 
 export default {
-  name: 'App',
-  components: {
-    HomePage
-  }
+  name: 'AircraftsPage'
 }
 </script>
 

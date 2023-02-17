@@ -23,7 +23,6 @@
 
 <script>
 import HomePage from './components/HomePage.vue'
-import CustomersPage from './components/CustomersPage.vue'
 
 export default {
   name: 'App',
