@@ -1,4 +1,21 @@
 <template>
+    <header class="nav-bar">
+      <div class="menu-item">
+          <a href="HomePage.vue">Customers</a>
+      </div>
+      <div class="menu-item">
+          <a href="customers.html">Customers</a>
+      </div>
+      <div class="menu-item">
+          <a href="charters.html">Charters</a>
+      </div>
+      <div class = "menu-item">
+          <a href="pilots.html">Pilots</a>
+      </div>
+      <div class="menu-item">
+          <a href="aircrafts.html">Aircrafts</a>
+      </div>
+  </header>
   <img alt="Vue logo" src="./assets/logo.png">
   <HomePage msg="Welcome to MyFlight!"/>
 </template>
