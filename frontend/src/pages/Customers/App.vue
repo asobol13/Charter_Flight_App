@@ -36,4 +36,30 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+/* Nav bar style */
+.nav-bar {
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  margin-left: -8px;
+  background-color: #333;
+}
+.menu-item {
+  float: left;
+}
+
+.menu-item a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.menu-item a:hover {
+  background-color: #1434A4;
+}
+.active {
+  background-color: gray;
+}
 </style>
