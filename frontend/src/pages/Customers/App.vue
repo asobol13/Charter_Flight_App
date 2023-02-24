@@ -18,13 +18,35 @@
   </header>
 
   <h1>This is the Customers Page!</h1>
+  <p>{{ customers }}</p>
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
-  name: 'CustomersPage'
-}
+  data() {
+    return {
+      customers: [],
+    };
+  },
+  methods: {
+    getCustomers() {
+      const path = 'VUE_APP_SQLALCHEMY_DATABASE_URI';
+    axios.get(path)
+    .then((res) => {
+      this.customers = res.data.customers;
+    })
+    .catch((error) => {
+      //eslint-disable-next-line
+      console.error(error);
+    });
+    },
+  },
+  created(){
+    this.getCustomers();
+  },
+};
 </script>
 
 <style>
