@@ -27,7 +27,7 @@
 
 <script>
 // import employees from "@/data/employees.js";
-// import Vueye from 'vueye-table'
+import VueyeTable from 'vueye-table'
 export default {
   name: "PilotsPage",
   data: () => ({
