@@ -18,13 +18,50 @@
   </header>
 
   <h1>This is the Pilots Page!</h1>
+
+  <div>
+    <VueyeTable :header-display="false" :data="pilots" :columns="columns" title="Pilots"></VueyeTable>
+  </div>
+
 </template>
 
 <script>
-
+// import employees from "@/data/employees.js";
+// import Vueye from 'vueye-table'
 export default {
-  name: 'PilotsPage'
-}
+  name: "PilotsPage",
+  data: () => ({
+      columns:[{
+        key:"id",
+        label: "ID",
+        sortable: true,
+        type: "number",
+        display: true
+      },
+      {
+        key: "pilot_name",
+        label: "Pilot Name",
+        sortable: true,
+        display: true
+      },
+      {
+        key: "pilot_charter",
+        label: "Pilot Charter",
+        sortable: true,
+        display: true
+      },
+      { 
+        key: "hourly_rate",
+        label: "Pilot Hourly Rate",
+        sortable: true,
+        display: true
+      }
+    ]
+  }),
+  components:{
+    VueyeTable
+  }
+};
 </script>
 
 <style>

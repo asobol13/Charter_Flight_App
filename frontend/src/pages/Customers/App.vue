@@ -18,10 +18,11 @@
   </header>
 
   <h1>This is the Customers Page!</h1>
-  <div v-for="p in post" :key="p.id">
+  <b-table striped hover :post="post"></b-table>
+  <!-- <div v-for="p in post" :key="p.id">
       <h2>{{ p.id }} - {{ p.title }}</h2>
       <p>{{ p.body }}</p>
-  </div>
+  </div> -->
 </template>
 
 <script>
