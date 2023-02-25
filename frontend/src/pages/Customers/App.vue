@@ -18,35 +18,57 @@
   </header>
 
   <h1>This is the Customers Page!</h1>
-  <p>{{ customers }}</p>
+  <div v-for="p in post" :key="p.id">
+      <h2>{{ p.id }} - {{ p.title }}</h2>
+      <p>{{ p.body }}</p>
+  </div>
 </template>
 
 <script>
-import axios from 'axios';
+// import axios from 'axios';
+
+// export default {
+//   data() {
+//     return {
+//       customers: []
+//     };
+//   },
+//   methods: {
+//     getCustomers() {
+//       const path = 'https://jsonplaceholder.typicode.com/todos/1';
+//     axios.get(path)
+//     .then((res) => {
+//       this.customers = res.data.customers;
+//     })
+//     .catch((error) => {
+//       //eslint-disable-next-line
+//       console.error(error);
+//     });
+//     },
+//   },
+//   created(){
+//     this.getCustomers();
+//   },
+// };
 
 export default {
   data() {
     return {
-      customers: [],
-    };
+      post: []
+    }
   },
   methods: {
-    getCustomers() {
-      const path = 'VUE_APP_SQLALCHEMY_DATABASE_URI';
-    axios.get(path)
-    .then((res) => {
-      this.customers = res.data.customers;
-    })
-    .catch((error) => {
-      //eslint-disable-next-line
-      console.error(error);
-    });
-    },
+    getPosts() {
+      fetch('https://jsonplaceholder.typicode.com/posts/')
+        .then(response => response.json())
+        .then(data => this.post = data)
+    }
   },
-  created(){
-    this.getCustomers();
-  },
-};
+  mounted() {
+    this.getPosts()
+  }
+}
+
 </script>
 
 <style>
