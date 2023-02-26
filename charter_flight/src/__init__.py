@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def create_app(test_config=None):
-    app = Flask(__name__, instance_relative_config=True)
+    app = Flask(__name__, instance_relative_config=True, template_folder='templates')
     app.config.from_mapping(
         SECRET_KEY = os.environ["SECRET_KEY"],
         SQLALCHEMY_DATABASE_URI = os.environ["SQLALCHEMY_DATABASE_URI"],

@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, abort, request
+from flask import Blueprint, jsonify, abort, request, render_template
 from ..models import Customer, db
 import hashlib
 import secrets
@@ -12,8 +12,13 @@ def scramble(password:str):
 # Creating blueprint
 bp = Blueprint('customers', __name__, url_prefix='/customers')
 
+#Route for customers
+@bp.route("/customers")
+def customers():
+    return render_template("customers.html")
+
 # Index of customers
-@bp.route('', methods=['GET'])
+@bp.route('/get', methods=['GET'])
 def index():
     customers = Customer.query.all()
     result = []
@@ -28,7 +33,7 @@ def show(account_number:int):
     return jsonify(c.serialize())
 
 # Creating accounts
-@bp.route('', methods=['POST'])
+@bp.route('/post', methods=['POST'])
 def create():
     # Request body must contain username, password and phone number
     if 'username' not in request.json or 'password' not in request.json or 'phonenumber' not in request.json:
