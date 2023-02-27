@@ -15,27 +15,34 @@
 <body>
     <header class="nav-bar">
       <div class="menu-item">
-        <a href="index.html">Home</a>
+        <a href="/">Home</a>
       </div>
         <div class="menu-item">
-            <a href="customers.html">Customers</a>
+            <a href="customers/">Customers</a>
         </div>
         <div class="menu-item">
-            <a href="charters.html">Charters</a>
+            <a href="charters/">Charters</a>
         </div>
         <div class = "menu-item">
-            <a href="pilots.html">Pilots</a>
+            <a href="pilots/">Pilots</a>
         </div>
         <div class="menu-item">
-            <a href="aircrafts.html">Aircrafts</a>
+            <a href="aircrafts/">Aircrafts</a>
         </div>
     </header>
     <h1>This page is going to have the table of customers and then you click a row for more info(the client)</h1>
     <h1>Then you can from there update or delete the client. There will also be a search bar up top as well</h1>
     <h1>as a create button to create a new customer.</h1>
 
-    <div class="container text-center">
-      <button type="button" class="btn btn-secondary btn-lg">Large button</button>
+    <div class="container" text-center>
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapsableForm" aria-expanded="false" aria-controls="collapseExample">
+        Button with data-target
+      </button>
+      <div class="collapse" id="collapsableForm">
+        <div class="card card-body">
+          This will contain a form to create a customer.
+        </div>
+      </div>
     </div>
 
 </body>
