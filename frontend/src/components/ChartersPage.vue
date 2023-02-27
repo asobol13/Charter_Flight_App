@@ -1,4 +1,0 @@
-<!--Charters Page-->
-<template>
-
-</template>

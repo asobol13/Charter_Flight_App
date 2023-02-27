@@ -1,4 +1,0 @@
-<!--Aircrafts Page-->
-<template>
-
-</template>

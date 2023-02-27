@@ -1,4 +1,0 @@
-<!--Pilots Page-->
-<template>
-
-</template>
