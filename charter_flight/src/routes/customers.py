@@ -13,9 +13,9 @@ def scramble(password:str):
 bp = Blueprint('customers', __name__, url_prefix='/customers')
 
 #Route for customers
-@bp.route("/customers")
+@bp.route("/")
 def customers():
-    return render_template("customers.html")
+    return render_template('customers.html')
 
 # Index of customers
 @bp.route('/get', methods=['GET'])
