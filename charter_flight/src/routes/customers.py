@@ -18,13 +18,14 @@ def customers():
     return render_template('customers.html')
 
 # Index of customers
-@bp.route('/get', methods=['GET'])
+@bp.route('/view', methods=['GET'])
 def index():
     customers = Customer.query.all()
     result = []
     for c in customers:
         result.append(c.serialize())
-    return jsonify(result)
+    # return jsonify(result)
+    return render_template('customers.html', result=result)
 
 # Showing accounts
 @bp.route('/<int:account_number>', methods=['GET'])

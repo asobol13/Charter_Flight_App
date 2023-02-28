@@ -50,15 +50,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">info</th>
-            <th scope="row">info</th>
-            <th scope="row">info</th>
-            <th scope="row">info</th>
-            <th scope="row">info</th>
-            <th scope="row">info</th>
-            <th scope="row">info</th>
+          {% for result in result %}
+            <tr>
+              <th scope="row">{{result.account_number}}</th>
+              <th scope="row">{{result.name}}</th>
+              <th scope="row">{{result.username}}</th>
+              <th scope="row">{{result.password}}</th>
+              <th scope="row">{{result.signed_agreement}}</th>
+              <th scope="row">{{result.phonenumber}}</th>
+              <th scope="row">{{result.email}}</th>
           </tr>
+        {% endfor %}
         </tbody>
       </table>
     </div>
