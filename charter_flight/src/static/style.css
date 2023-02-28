@@ -28,11 +28,6 @@
     background-color: gray;
 }
 
-/* Style for containers */
-body{
-    background:#eee;
-}
-
 /* Calendar Styling */
 #calendar {
     float: left;
@@ -44,4 +39,14 @@ body{
     padding: 20px;
     float: right;
     
+}
+
+/* Collapsable Forms */
+.collapsableForm{
+    margin-top: 10px;
+}
+
+/* Table Styling */
+.table {
+    margin-top: 25px;
 }
