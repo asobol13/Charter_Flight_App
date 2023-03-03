@@ -19,14 +19,14 @@ def index():
     result = []
     for c in customers:
         result.append(c.serialize())
-    # return jsonify(result)
     return render_template('customers.html', result=result)
 
 # Showing accounts
 @bp.route('/<int:account_number>', methods=['GET'])
 def show(account_number:int):
     c = Customer.query.get_or_404(account_number)
-    return jsonify(c.serialize())
+    #return jsonify(c.serialize())
+    return render_template('customers.html', c=c)
 
 # Creating accounts
 @bp.route('/post', methods=['POST'])

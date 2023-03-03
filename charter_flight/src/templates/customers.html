@@ -14,6 +14,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- This is the javascript for the view, delete and update options -->
+    <script>
+      $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
   </head>
 <body>
     <header class="nav-bar">
@@ -36,8 +42,64 @@
     <h1>This page is going to have the table of customers and then you click a row for more info(the client)</h1>
     <h1>Then you can from there update or delete the client. There will also be a search bar up top as well</h1>
 
+    <div class="container" text-center>
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapsableForm" aria-expanded="false" aria-controls="collapseExample">
+        + Create
+      </button>
+      <div class="collapse" id="collapsableForm">
+        <div class="card card-body">
+          <form>
+            <!-- Name field -->
+            <div class="form-group">
+              <label for="nameInput">Name</label>
+              <input type="name" class="form-control" id="nameInput" aria-describedby="nameHelp" placeholder="Enter name">
+            </div>
+            <!-- Username field -->
+            <div class="form-group">
+              <label for="usernameInput">Username</label>
+              <input type="username" class="form-control" id="usernameInput" aria-describedby="usernameHelp" placeholder="Enter username">
+            </div>
+            <!-- Password field -->
+            <div class="form-group">
+              <label for="passwordInput">Password</label>
+              <input type="password" class="form-control" id="passwordInput" aria-describedby="passwordHelp" placeholder="Enter password">
+            </div>
+            <!-- True/false boolean field -->
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="signedAgreementButton" id="signedAgreement1" value="true" checked>
+              <label class="form-check-label" for="signedAgreement1">
+                True
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="signedAgreementButton" id="signedAgreement2" value="false" checked>
+              <label class="form-check-label" for="signedAgreement2">
+                False
+              </label>
+            </div>
+            <!-- Phone number field -->
+            <div class="form-group">
+              <label for="phonenumberInput">Phone Number</label>
+              <input type="phonenumber" class="form-control" id="phonenumberInput" aria-describedby="phonenumberHelp" placeholder="Enter phone number">
+            </div>
+            <!-- Email field -->
+            <div class="form-group">
+              <label for="nameInput">Email</label>
+              <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="container">
+              <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <div class="container">
       <table class="table table-hover">
+        <div class="search-box">
+          <input type="text" class="form-control" placeholder="Search&hellip;">
+        </div>
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -47,6 +109,7 @@
             <th scope="col">signed_agreement</th>
             <th scope="col">phonenumber</th>
             <th scope="col">email</th>
+            <th scope="col">actions</th>
           </tr>
         </thead>
         <tbody>
@@ -59,21 +122,13 @@
               <th scope="row">{{result.signed_agreement}}</th>
               <th scope="row">{{result.phonenumber}}</th>
               <th scope="row">{{result.email}}</th>
+              <th scope="row"><a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+              <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+              <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a></th>
           </tr>
         {% endfor %}
         </tbody>
       </table>
-    </div>
-
-    <div class="container" text-center>
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapsableForm" aria-expanded="false" aria-controls="collapseExample">
-        + Create
-      </button>
-      <div class="collapse" id="collapsableForm">
-        <div class="card card-body">
-          This will contain a form to create a customer.
-        </div>
-      </div>
     </div>
 
 </body>

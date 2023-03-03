@@ -44,9 +44,16 @@
 /* Collapsable Forms */
 .collapsableForm{
     margin-top: 10px;
+    width: 50%;
 }
 
 /* Table Styling */
 .table {
     margin-top: 25px;
+    width: 100%;
+}
+
+.search-box{
+    margin-top: 25px;
+    width: 30%;
 }
