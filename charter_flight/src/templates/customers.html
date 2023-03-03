@@ -27,18 +27,15 @@
       <div class="menu-item">
         <a href="/">Home</a>
       </div>
-        <div class="menu-item">
-            <a href="customers/">Customers</a>
-        </div>
-        <div class="menu-item">
-            <a href="charters/">Charters</a>
-        </div>
-        <div class = "menu-item">
-            <a href="pilots/">Pilots</a>
-        </div>
-        <div class="menu-item">
-            <a href="aircrafts/">Aircrafts</a>
-        </div>
+      <div class="menu-item">
+          <a href="charters/">Charters</a>
+      </div>
+      <div class = "menu-item">
+        <a href="pilots/">Pilots</a>
+      </div>
+      <div class="menu-item">
+        <a href="aircrafts/">Aircrafts</a>
+      </div>
     </header>
     <h1>This page is going to have the table of customers and then you click a row for more info(the client)</h1>
     <h1>Then you can from there update or delete the client. There will also be a search bar up top as well</h1>
@@ -116,16 +113,16 @@
         <tbody>
           {% for result in result %}
             <tr>
-              <th scope="row">{{result.account_number}}</th>
-              <th scope="row">{{result.name}}</th>
-              <th scope="row">{{result.username}}</th>
-              <th scope="row">{{result.password}}</th>
-              <th scope="row">{{result.signed_agreement}}</th>
-              <th scope="row">{{result.phonenumber}}</th>
-              <th scope="row">{{result.email}}</th>
-              <th scope="row"><a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+              <td scope="row">{{result.account_number}}</td>
+              <td scope="row">{{result.name}}</td>
+              <td scope="row">{{result.username}}</td>
+              <td scope="row">{{result.password}}</td>
+              <td scope="row">{{result.signed_agreement}}</td>
+              <td scope="row">{{result.phonenumber}}</td>
+              <td scope="row">{{result.email}}</td>
+              <td scope="row"><a href="#" class="View" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
               <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-              <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a></th>
+              <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a></td>
           </tr>
         {% endfor %}
         </tbody>

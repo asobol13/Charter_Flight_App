@@ -22,7 +22,7 @@ def index():
     return render_template('customers.html', result=result)
 
 # Showing accounts
-@bp.route('/<int:account_number>', methods=['GET'])
+@bp.route('/view/<int:account_number>/', methods=['GET'])  #/<int:account_number>
 def show(account_number:int):
     c = Customer.query.get_or_404(account_number)
     #return jsonify(c.serialize())
