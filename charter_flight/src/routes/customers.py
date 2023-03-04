@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, abort, request, render_template
+from flask import Blueprint, jsonify, abort, request, render_template, url_for, redirect
 from ..models import Customer, db
 import hashlib
 import secrets
@@ -22,11 +22,16 @@ def index():
     return render_template('customers.html', result=result)
 
 # Showing accounts
-@bp.route('/view/<int:account_number>/', methods=['GET'])  #/<int:account_number>
+# @bp.route('/view/<int:account_number>', methods=['GET'])  #/<int:account_number>
+# def show(account_number:int):
+#     c = Customer.query.get_or_404(account_number)
+#     #return jsonify(c.serialize())
+#     return render_template('view.html', c=c)
+
+@bp.route('/view/<int:account_number>', methods=['GET'])  #/<int:account_number>
 def show(account_number:int):
     c = Customer.query.get_or_404(account_number)
-    #return jsonify(c.serialize())
-    return render_template('customers.html', c=c)
+    return render_template('view.html', c=c)
 
 # Creating accounts
 @bp.route('/post', methods=['POST'])

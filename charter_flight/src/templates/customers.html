@@ -21,6 +21,9 @@
         $('[data-toggle="tooltip"]').tooltip();
       });
     </script>
+    <!-- View specific Account-->
+    <script>
+    </script>
   </head>
 <body>
     <header class="nav-bar">
@@ -120,7 +123,7 @@
               <td scope="row">{{result.signed_agreement}}</td>
               <td scope="row">{{result.phonenumber}}</td>
               <td scope="row">{{result.email}}</td>
-              <td scope="row"><a href="#" class="View" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+              <td scope="row"><a href="view/{{result.account_number}}" class="View" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
               <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
               <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a></td>
           </tr>
@@ -128,6 +131,5 @@
         </tbody>
       </table>
     </div>
-
 </body>
 </html>

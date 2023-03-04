@@ -57,3 +57,14 @@
     margin-top: 25px;
     width: 30%;
 }
+
+/* Card Styling */
+.card{
+    margin-top: 25px;
+    width: 50%;
+}
+
+#inputaccount_number {
+    width: 25%;
+    margin-top: 25px;
+}
