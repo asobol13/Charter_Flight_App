@@ -68,3 +68,10 @@
     width: 25%;
     margin-top: 25px;
 }
+
+/* Update, Delete, Create Buttons */
+#updatebutton{
+    text-align: center;
+    margin-top: 25px;
+    float: left;
+}

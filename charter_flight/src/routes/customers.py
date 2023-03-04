@@ -22,13 +22,7 @@ def index():
     return render_template('customers.html', result=result)
 
 # Showing accounts
-# @bp.route('/view/<int:account_number>', methods=['GET'])  #/<int:account_number>
-# def show(account_number:int):
-#     c = Customer.query.get_or_404(account_number)
-#     #return jsonify(c.serialize())
-#     return render_template('view.html', c=c)
-
-@bp.route('/view/<int:account_number>', methods=['GET'])  #/<int:account_number>
+@bp.route('/view/<int:account_number>', methods=['GET'])
 def show(account_number:int):
     c = Customer.query.get_or_404(account_number)
     return render_template('view.html', c=c)
@@ -56,19 +50,20 @@ def create():
     return jsonify(c.serialize())
 
 # Deleting accounts
-@bp.route('/<int:account_number>', methods = ['DELETE'])
+@bp.route('/delete/<int:account_number>', methods = ['DELETE'])
 def delete(account_number:int):
     c = Customer.query.get_or_404(account_number)
     try:
         db.session.delete(c) # prepare delete statement
         db.session.commit() # execute delete statement
-        return jsonify(True)
+        #return jsonify(True)
+        #return render_template('view.html',c=c)
     except:
         # something went wrong
         return jsonify(False)
 
 # Updating accounts
-@bp.route('/<int:account_number>', methods = ['PATCH', 'PUT'])
+@bp.route('/update/<int:account_number>', methods = ['PATCH', 'PUT'])
 def update(account_number:int):
     c = Customer.query.get_or_404(account_number)
     if (
@@ -104,6 +99,7 @@ def update(account_number:int):
 
     try:
         db.session.commit()
-        return jsonify(c.serialize())
+        #return jsonify(c.serialize())
+        #return render_template('view.html', c=c)
     except:
         return jsonify(False)
