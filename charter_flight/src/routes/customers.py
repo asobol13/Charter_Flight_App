@@ -1,4 +1,7 @@
 from flask import Blueprint, jsonify, abort, request, render_template, url_for, redirect
+from flask_wtf import FlaskForm
+from wtforms import StringField, BooleanField, SubmitField, RadioField, PasswordField
+from wtforms.validators import InputRequired
 from ..models import Customer, db
 import hashlib
 import secrets
@@ -8,6 +11,17 @@ def scramble(password:str):
     """Hash and salt the given password"""
     salt = secrets.token_hex(16)
     return hashlib.sha512((password + salt).encode('utf-8')).hexdigest()
+
+#Create a Form Class
+class Form(FlaskForm):
+    name = StringField("Name", validators=[InputRequired()])
+    username = StringField("Username", validators=[InputRequired()])
+    password = PasswordField("Password", validators=[InputRequired()])
+    signed_agreement = BooleanField("Signed Agreement")
+    radiobutton = RadioField
+    phonenumber = StringField("Phone Number", validators=[InputRequired()])
+    email = StringField("Email")
+    submit = SubmitField("Submit")
 
 # Creating blueprint
 bp = Blueprint('customers', __name__, url_prefix='/customers')
@@ -28,26 +42,50 @@ def show(account_number:int):
     return render_template('view.html', c=c)
 
 # Creating accounts
-@bp.route('/post', methods=['POST'])
+# @bp.route('/create/', methods=['GET', 'POST'])
+# def create():
+#     # Request body must contain username, password and phone number
+#     if 'username' not in request.json or 'password' not in request.json or 'phonenumber' not in request.json:
+#         return redirect(url_for('index.html'))
+#     if len(request.json['username']) < 3 or len(request.json['password']) < 8:
+#         #return abort(400)
+#         return redirect(url_for('index.html'))
+#     # Construct account
+#     if request.method =='POST':
+#         c = Customer (
+#             #account_number = request.json['account_number'],
+#             name = request.form['name'],
+#             signed_agreement = request.form['signed_agreement'],
+#             username = request.form['username'],
+#             password = scramble(request.form['password']),
+#             phonenumber = request.form['phonenumber'],
+#             email = request.form['email']
+#         )
+#         db.session.add(c) # Preparing create statement
+#         db.session.commit() # Executing create statement
+#         #return jsonify(c.serialize())
+#         return redirect(url_for('view.html'))
+#     return render_template('create.html', c=c)
+
+@bp.route('/create', methods=['POST', 'GET'])
 def create():
+    form = Form(request.form)
     # Request body must contain username, password and phone number
     if 'username' not in request.json or 'password' not in request.json or 'phonenumber' not in request.json:
-        return abort(400)
+        return redirect(url_for('index.html'))
     if len(request.json['username']) < 3 or len(request.json['password']) < 8:
-        return abort(400)
+        #return abort(400)
+        return redirect(url_for('index.html'))
+
     # Construct account
-    c = Customer(
-        #account_number = request.json['account_number'],
-        name = request.json['name'],
-        signed_agreement = request.json['signed_agreement'],
-        username = request.json['username'],
-        password = scramble(request.json['password']),
-        phonenumber = request.json['phonenumber'],
-        email = request.json['email']
-    )
-    db.session.add(c) # Preparing create statement
-    db.session.commit() # Executing create statement
-    return jsonify(c.serialize())
+    if request.method == 'POST' and form.validate():
+        c = Customer(form.name.data, form.username.data, form.password.data, form.signed_agreement.data,
+            form.phonenumber.data, form.email.data)
+        db.session.add(c)
+        db.session.commit()
+        return redirect(url_for('cusomters.html'))
+    return render_template('create.html', form=form)
+
 
 # Deleting accounts
 @bp.route('/delete/<int:account_number>', methods = ['DELETE'])

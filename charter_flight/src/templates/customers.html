@@ -49,47 +49,49 @@
       </button>
       <div class="collapse" id="collapsableForm">
         <div class="card card-body">
-          <form>
+          <form action="/customers/create" method="POST">
             <!-- Name field -->
-            <div class="form-group">
-              <label for="nameInput">Name</label>
-              <input type="name" class="form-control" id="nameInput" aria-describedby="nameHelp" placeholder="Enter name">
-            </div>
+            <!-- <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" name="name" class="form-control" value="" id="nameInput" placeholder="Enter name" required>
+            </div> -->
             <!-- Username field -->
             <div class="form-group">
-              <label for="usernameInput">Username</label>
-              <input type="username" class="form-control" id="usernameInput" aria-describedby="usernameHelp" placeholder="Enter username">
+              <label for="username">Username</label>
+              <input type="text" name="username" class="form-control" value="" id="usernameInput" placeholder="Enter username" required>
             </div>
             <!-- Password field -->
             <div class="form-group">
-              <label for="passwordInput">Password</label>
-              <input type="password" class="form-control" id="passwordInput" aria-describedby="passwordHelp" placeholder="Enter password">
+              <label for="password">Password</label>
+              <input type="password" name="password" class="form-control" value="" id="passwordInput" placeholder="Enter password" required>
             </div>
             <!-- True/false boolean field -->
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="signedAgreementButton" id="signedAgreement1" value="true" checked>
-              <label class="form-check-label" for="signedAgreement1">
+              <!--Signed Agreement-->
+              <input class="form-check-input" type="radio" name="signed_agreement" value="True" id="signedAgreement1" checked>
+              <label class="form-check-label" for="signed_agreement">
                 True
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="signedAgreementButton" id="signedAgreement2" value="false" checked>
-              <label class="form-check-label" for="signedAgreement2">
+              <input class="form-check-input" type="radio" name="signed_agreement" value="False" id="signedAgreement2" checked>
+              <label class="form-check-label" for="signed_agreement">
                 False
               </label>
             </div>
             <!-- Phone number field -->
             <div class="form-group">
-              <label for="phonenumberInput">Phone Number</label>
-              <input type="phonenumber" class="form-control" id="phonenumberInput" aria-describedby="phonenumberHelp" placeholder="Enter phone number">
+              <label for="phonenumber">Phone Number</label>
+              <input type="text" name="phonenumber" class="form-control" value="" id="phonenumberInput" placeholder="Enter phone number" required>
             </div>
             <!-- Email field -->
             <div class="form-group">
-              <label for="nameInput">Email</label>
-              <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email">
+              <label for="email">Email</label>
+              <input type="text" name="email" class="form-control" value="" id="emailInput" placeholder="Enter email">
             </div>
             <div class="container">
-              <button type="button" class="btn btn-primary">Submit</button>
+              <input type="submit" value="Save">
+              <!-- <a href="create/" type="submit" class="btn btn-primary" role="button" method="post">Submit</a> -->
             </div>
           </form>
         </div>
