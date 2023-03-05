@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, abort, request, render_template, url_for, redirect
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, SubmitField, RadioField, PasswordField
-from wtforms.validators import InputRequired
+from wtforms.validators import DataRequired
 from ..models import Customer, db
 import hashlib
 import secrets
@@ -14,12 +14,11 @@ def scramble(password:str):
 
 #Create a Form Class
 class Form(FlaskForm):
-    name = StringField("Name", validators=[InputRequired()])
-    username = StringField("Username", validators=[InputRequired()])
-    password = PasswordField("Password", validators=[InputRequired()])
-    signed_agreement = BooleanField("Signed Agreement")
-    radiobutton = RadioField
-    phonenumber = StringField("Phone Number", validators=[InputRequired()])
+    name = StringField("Name", validators=[DataRequired()])
+    username = StringField("Username", validators=[DataRequired()])
+    password = PasswordField("Password", validators=[DataRequired()])
+    signed_agreement = BooleanField("Signed Agreement", default=False)
+    phonenumber = StringField("Phone Number", validators=[DataRequired()])
     email = StringField("Email")
     submit = SubmitField("Submit")
 
@@ -69,21 +68,18 @@ def show(account_number:int):
 
 @bp.route('/create', methods=['POST', 'GET'])
 def create():
-    form = Form(request.form)
-    # Request body must contain username, password and phone number
-    if 'username' not in request.json or 'password' not in request.json or 'phonenumber' not in request.json:
-        return redirect(url_for('index.html'))
-    if len(request.json['username']) < 3 or len(request.json['password']) < 8:
-        #return abort(400)
-        return redirect(url_for('index.html'))
+    form = Form()
 
     # Construct account
-    if request.method == 'POST' and form.validate():
-        c = Customer(form.name.data, form.username.data, form.password.data, form.signed_agreement.data,
-            form.phonenumber.data, form.email.data)
-        db.session.add(c)
+    if form.validate_on_submit():
+        name = form.name.data
+        username = form.username.data
+        password = form.password.data
+        signed_agreement = form.signed_agreement.data
+        phonenumber = form.phonenumber.data
+        email = form.email.data
         db.session.commit()
-        return redirect(url_for('cusomters.html'))
+        return redirect(url_for('customers.index'))
     return render_template('create.html', form=form)
 
 
