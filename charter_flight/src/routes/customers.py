@@ -69,15 +69,17 @@ def show(account_number:int):
 @bp.route('/create', methods=['POST', 'GET'])
 def create():
     form = Form()
-
     # Construct account
     if form.validate_on_submit():
-        name = form.name.data
-        username = form.username.data
-        password = form.password.data
-        signed_agreement = form.signed_agreement.data
-        phonenumber = form.phonenumber.data
-        email = form.email.data
+        c = Customer(
+            name = form.name.data,
+            username = form.username.data,
+            password = form.password.data,
+            signed_agreement = form.signed_agreement.data,
+            phonenumber = form.phonenumber.data,
+            email = form.email.data
+        )
+        db.session.add(c)
         db.session.commit()
         return redirect(url_for('customers.index'))
     return render_template('create.html', form=form)
