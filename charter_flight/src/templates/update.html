@@ -17,7 +17,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   </head>
 <body>
-  <header class="nav-bar">
+    <header class="nav-bar">
     <div class="menu-item">
       <a href="/">Home</a>
     </div>
@@ -31,9 +31,48 @@
       <a href="pilots/">Pilots</a>
     </div>
     <div class="menu-item">
-      <a href="aircrafts/">Aircrafts</a>
+        <a href="aircrafts/">Aircrafts</a>
     </div>
-  </header>
-  <h1>UPDATES</h1>
+    </header>
+    <h1>UPDATES</h1>
+    <div class="container" text-center>
+        <form action="" method="POST">
+            {{form.hidden_tag()}}
+            <!-- Name field -->
+            <div class="form-group">
+                {{form.name.label()}}
+                {{form.name(class="form-control", value=c.name)}}
+            </div>
+            <!-- Username field -->
+            <div class="form-group">
+                {{form.username.label()}}
+                {{form.username(class="form-control", value=c.username)}}
+            </div>
+            <!-- Password field -->
+            <div class="form-group">
+                {{form.password.label()}}
+                {{form.password(class="form-control", value=c.password)}}
+            </div>
+            <!-- True/false boolean field -->
+            <div class="form-check">
+                <!--Signed Agreement-->
+                {{form.signed_agreement.label()}}
+                {{form.signed_agreement(class="form-control", value=c.signed_agreement)}}
+            </div>
+            <!-- Phone number field -->
+            <div class="form-group">
+                {{form.phonenumber.label()}}
+                {{form.phonenumber(class="form-control", value=c.phonenumber)}}
+            </div>
+            <!-- Email field -->
+            <div class="form-group">
+                {{form.email.label()}}
+                {{form.email(class="form-control", value=c.email)}}
+            </div>
+            <div class="container">
+                {{form.submit(class="btn btn-primary m-5")}}
+            </div>
+        </form>
+    </div>
 </body>
 </html>
