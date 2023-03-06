@@ -8,7 +8,7 @@
     <meta name="viewport"
     content="width=device-width,
     initial-scale=1.0">
-    <title>Customers View Page</title>
+    <title>Customers Update Page</title>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -34,23 +34,6 @@
       <a href="aircrafts/">Aircrafts</a>
     </div>
   </header>
-    <div class="container">
-      <div class="card">
-        <div class="card-header">
-          {{c.name}}
-        </div>
-        <ul class="list-group-item">
-          <li class="list-group-item">Account Number: {{c.account_number}}</li>
-          <li class="list-group-item">Username: {{c.username}}</li>
-          <li class="list-group-item">Password: {{c.password}}</li>
-          <li class="list-group-item">Signed Agreement: {{c.signed_agreement}}</li>
-          <li class="list-group-item">Phone Number: {{c.phonenumber}}</li>
-          <li class="list-group-item">Email: {{c.email}}</li>
-        </ul>
-      </div>
-    </div>
-    <div class="container">
-      <a class="btn btn-primary" href="/customers/update" role="button">Update</a>
-    </div>
+  <h1>UPDATES</h1>
 </body>
 </html>
