@@ -34,6 +34,10 @@
       <a href="aircrafts/">Aircrafts</a>
     </div>
   </header>
+  <h1>Customer View</h1>
+  <h4>TODO: Photo Option?</h4>
+  <h4>Styling</h4>
+  <h4>Tie in charters/pilots/aircrafts?</h4>
     <div class="container">
       <div class="card">
         <div class="card-header">
@@ -51,6 +55,9 @@
     </div>
     <div class="container">
       <a class="btn btn-primary" href="/customers/update/{{c.account_number}}" role="button" id="updatebutton">Update</a>
+    </div>
+    <div class="container">
+      <a class="btn btn-primary" href="/customers/delete/{{c.account_number}}" role="button" id="deletebutton">Delete</a>
     </div>
 </body>
 </html>

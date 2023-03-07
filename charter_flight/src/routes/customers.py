@@ -70,17 +70,31 @@ def create():
 
 
 # Deleting accounts
-@bp.route('/delete/<int:account_number>', methods = ['DELETE'])
+# @bp.route('/delete/<int:account_number>', methods = ['DELETE'])
+# def delete(account_number:int):
+#     c = Customer.query.get_or_404(account_number)
+#     try:
+#         db.session.delete(c) # prepare delete statement
+#         db.session.commit() # execute delete statement
+#         #return jsonify(True)
+#         #return render_template('view.html',c=c)
+#     except:
+#         # something went wrong
+#         return jsonify(False)
+
+@bp.route('/delete/<int:account_number>', methods = ['POST', 'GET'])
 def delete(account_number:int):
     c = Customer.query.get_or_404(account_number)
     try:
         db.session.delete(c) # prepare delete statement
         db.session.commit() # execute delete statement
+        return redirect(url_for('delete.html'))
         #return jsonify(True)
         #return render_template('view.html',c=c)
     except:
-        # something went wrong
-        return jsonify(False)
+        # something went wrong 
+        flash("Oops, looks like there was a problem. Please try again!")
+        return render_template("update.html", c=c)
 
 # Updating accounts
 # @bp.route('/update/<int:account_number>', methods = ['PATCH', 'PUT'])

@@ -78,6 +78,13 @@
 
 #createButton{
     text-align: center;
-    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-right: 80px;
     float: right;
+}
+
+#deletebutton{
+    text-align: center;
+    margin-top: 25px;
+    margin-left:15px;
 }
