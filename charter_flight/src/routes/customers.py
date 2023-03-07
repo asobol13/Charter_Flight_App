@@ -127,23 +127,24 @@ def delete(account_number:int):
 #TODO: Not updating, also boolean field is not populating
 @bp.route('/update/<int:account_number>', methods = ['POST', 'GET'])
 def update(account_number:int):
-    form = Form()
     c = Customer.query.get_or_404(account_number)
+    form = Form()
 
-    if request.method == "POST":
+    if request.method == "POST" and form.validate():
         c.name = request.form['name']
         c.username = request.form['username']
         c.password = request.form['password']
-        c.signed_agreement = request.form['signed_agreement']
+        # c.signed_agreement = request.form['signed_agreement']
         c.phonenumber = request.form['phonenumber']
         c.email = request.form['email']
         
         try:
+            db.session.add(c)
             db.session.commit()
             flash("Customer Updated Successfully!")
-            return render_template("update.html", form=form, c=c)
+            return render_template("customers.html", form=form, c=c)
         except:
             flash("Oops, looks like there was a problem. Please try again!")
-            return render_template("update.html", form=form, c=c)
+            return render_template("update.html", form=form)
     else:
         return render_template("update.html", form=form, c=c)

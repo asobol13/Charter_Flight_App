@@ -75,3 +75,9 @@
     margin-top: 25px;
     float: left;
 }
+
+#createButton{
+    text-align: center;
+    margin-top: 25px;
+    float: right;
+}

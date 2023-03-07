@@ -36,7 +36,7 @@
     </header>
     <h1>UPDATES</h1>
     <div class="container" text-center>
-        <form action="" method="POST">
+        <form action="/customers/update/{{c.account_number}}" method="POST">
             {{form.hidden_tag()}}
             <!-- Name field -->
             <div class="form-group">
@@ -54,11 +54,11 @@
                 {{form.password(class="form-control", value=c.password)}}
             </div>
             <!-- True/false boolean field -->
-            <div class="form-check">
-                <!--Signed Agreement-->
+            <!-- <div class="form-check">
+                Signed Agreement
                 {{form.signed_agreement.label()}}
                 {{form.signed_agreement(class="form-control", value=c.signed_agreement)}}
-            </div>
+            </div> -->
             <!-- Phone number field -->
             <div class="form-group">
                 {{form.phonenumber.label()}}
