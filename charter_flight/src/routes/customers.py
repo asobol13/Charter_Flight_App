@@ -18,8 +18,8 @@ class Form(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     username = StringField("Username", validators=[DataRequired()])
     password = StringField("Password", widget=PasswordInput(hide_value=False),validators=[DataRequired()])
-    signed_agreement = RadioField("Signed Agreement", coerce=bool, choices=[(1, 'True'), (0, 'False')], default=0)
-    # signed_agreement = BooleanField("Signed Agreement", default=False)
+    # signed_agreement = RadioField("Signed Agreement", coerce=bool, choices=[(1, 'True'), (0, 'False')])
+    signed_agreement = BooleanField("Signed Agreement", default=False)
     phonenumber = StringField("Phone Number", validators=[DataRequired()])
     email = StringField("Email")
     submit = SubmitField("Save")
@@ -69,27 +69,13 @@ def create():
         return redirect(url_for('customers.index'))
     return render_template('create.html', form=form)
 
-
-# Deleting accounts
-# @bp.route('/delete/<int:account_number>', methods = ['DELETE'])
-# def delete(account_number:int):
-#     c = Customer.query.get_or_404(account_number)
-#     try:
-#         db.session.delete(c) # prepare delete statement
-#         db.session.commit() # execute delete statement
-#         #return jsonify(True)
-#         #return render_template('view.html',c=c)
-#     except:
-#         # something went wrong
-#         return jsonify(False)
-
 @bp.route('/delete/<int:account_number>', methods = ['POST', 'GET'])
 def delete(account_number:int):
     c = Customer.query.get_or_404(account_number)
     try:
         db.session.delete(c) # prepare delete statement
         db.session.commit() # execute delete statement
-        return redirect(url_for('delete.html'))
+        return redirect(url_for('customers.index'))
         #return jsonify(True)
         #return render_template('view.html',c=c)
     except:
@@ -142,30 +128,30 @@ def delete(account_number:int):
 #TODO: Not updating, also boolean field is not populating
 @bp.route('/update/<int:account_number>', methods = ['POST', 'GET'])
 def update(account_number:int):
-    c = Customer.query.get_or_404(account_number)
     form = Form()
 
-    if request.method == "POST" and form.validate():
-        c.name = request.form['name']
-        c.username = request.form['username']
-        c.password = request.form['password']
-        c.signed_agreement = request.form['signed_agreement']
-        c.phonenumber = request.form['phonenumber']
-        c.email = request.form['email']
-        # c.name = form.name.data,
-        # c.username = form.username.data,
-        # c.password = form.password.data,
-        # c.signed_agreement = form.signed_agreement.data,
-        # c.phonenumber = form.phonenumber.data,
-        # c.email = form.email.data
+    if request.method == "POST" and form.validate_on_submit():
+        if c.username in request.form:
+            if len(request.form['username']) < 3:
+                return redirect(url_for('customers.index'))
+        username = request.form['name']
+        if c.password in request.form:
+            if len(request.form['phonenumber']) > 12 or len(request.form['phonenumber']) < 7:
+                return redirect(url_for('customers.index'))
+        password = request.form['password']
+        name = request.form['name']
+        signed_agreement = request.form['signed_agreement']
+        phonenumber = request.form['phonenumber']
+        email = request.form['email']
         
         try:
             db.session.add(c)
             db.session.commit()
             flash("Customer Updated Successfully!")
-            return render_template("customers.html", form=form, c=c)
+            return render_template('customers.index', form=form, c=c)
         except:
+            db.session.rollback()
             flash("Oops, looks like there was a problem. Please try again!")
             return render_template("update.html", form=form, c=c)
     else:
-        return render_template("update.html", form=form, c=c)
+        return render_template("update.html", form=form)
