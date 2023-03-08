@@ -69,6 +69,11 @@
     margin-top: 25px;
 }
 
+/* Headings */
+.h1 {
+    text-align: center;
+}
+
 /* Update, Delete, Create Buttons */
 #updatebutton{
     text-align: center;

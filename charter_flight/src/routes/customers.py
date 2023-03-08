@@ -149,9 +149,15 @@ def update(account_number:int):
         c.name = request.form['name']
         c.username = request.form['username']
         c.password = request.form['password']
-        # c.signed_agreement = request.form['signed_agreement']
+        c.signed_agreement = request.form['signed_agreement']
         c.phonenumber = request.form['phonenumber']
         c.email = request.form['email']
+        # c.name = form.name.data,
+        # c.username = form.username.data,
+        # c.password = form.password.data,
+        # c.signed_agreement = form.signed_agreement.data,
+        # c.phonenumber = form.phonenumber.data,
+        # c.email = form.email.data
         
         try:
             db.session.add(c)
@@ -160,6 +166,6 @@ def update(account_number:int):
             return render_template("customers.html", form=form, c=c)
         except:
             flash("Oops, looks like there was a problem. Please try again!")
-            return render_template("update.html", form=form)
+            return render_template("update.html", form=form, c=c)
     else:
         return render_template("update.html", form=form, c=c)
