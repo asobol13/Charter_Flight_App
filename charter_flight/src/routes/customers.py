@@ -76,8 +76,6 @@ def delete(account_number:int):
         db.session.delete(c) # prepare delete statement
         db.session.commit() # execute delete statement
         return redirect(url_for('customers.index'))
-        #return jsonify(True)
-        #return render_template('view.html',c=c)
     except:
         # something went wrong 
         flash("Oops, looks like there was a problem. Please try again!")
@@ -126,23 +124,24 @@ def delete(account_number:int):
 #         return jsonify(False)
 
 #TODO: Not updating, also boolean field is not populating
-@bp.route('/update/<int:account_number>', methods = ['POST', 'GET'])
+@bp.route('/update/<int:account_number>', methods = ['GET', 'POST'])
 def update(account_number:int):
     form = Form()
+    c = Customer.query.get_or_404(account_number)
 
     if request.method == "POST" and form.validate_on_submit():
-        if c.username in request.form:
-            if len(request.form['username']) < 3:
-                return redirect(url_for('customers.index'))
-        username = request.form['name']
-        if c.password in request.form:
-            if len(request.form['phonenumber']) > 12 or len(request.form['phonenumber']) < 7:
-                return redirect(url_for('customers.index'))
-        password = request.form['password']
-        name = request.form['name']
-        signed_agreement = request.form['signed_agreement']
-        phonenumber = request.form['phonenumber']
-        email = request.form['email']
+        if len(request.form['username']) < 3:
+            return render_template('customers.html')
+        c.username = request.form['username']
+        if len(request.form['password']) < 8:
+            return render_template('customers.html')
+        c.password = request.form['password']
+        if len(request.form['phonenumber']) > 12 or len(request.form['phonenumber']) < 7:
+            return render_template('customers.html')
+        c.phonenumber = request.form['phonenumber']
+        c.email = request.form['email']
+        c.name = request.form['name']
+        # c.signed_agreement = request.form['signed_agreement']
         
         try:
             db.session.add(c)
@@ -154,4 +153,4 @@ def update(account_number:int):
             flash("Oops, looks like there was a problem. Please try again!")
             return render_template("update.html", form=form, c=c)
     else:
-        return render_template("update.html", form=form)
+        return render_template("update.html", form=form, c=c)
