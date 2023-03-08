@@ -48,7 +48,7 @@
     <div class="container">
       <table class="table table-hover">
         <div class="search-box">
-          <input type="text" class="form-control" placeholder="Search&hellip;">
+          <input type="text" class="form-control" id="mySearch" placeholder="Search&hellip;">
         </div>
         <a class="btn btn-primary" href="/customers/create" role="button" id="createButton">+ Create</a>
         <thead>
@@ -63,7 +63,7 @@
             <th scope="col">actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="myTable">
           {% for result in result %}
             <tr>
               <td scope="row">{{result.account_number}}</td>
@@ -81,5 +81,15 @@
         </tbody>
       </table>
     </div>
+    <script>
+      $(document).ready(function(){
+        $("#mySearch").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        });
+      });
+      </script>
 </body>
 </html>
