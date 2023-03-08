@@ -18,7 +18,8 @@ class Form(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     username = StringField("Username", validators=[DataRequired()])
     password = StringField("Password", widget=PasswordInput(hide_value=False),validators=[DataRequired()])
-    signed_agreement = BooleanField("Signed Agreement", default=False)
+    signed_agreement = RadioField("Signed Agreement", coerce=bool, choices=[(1, 'True'), (0, 'False')], default=0)
+    # signed_agreement = BooleanField("Signed Agreement", default=False)
     phonenumber = StringField("Phone Number", validators=[DataRequired()])
     email = StringField("Email")
     submit = SubmitField("Save")
@@ -94,7 +95,7 @@ def delete(account_number:int):
     except:
         # something went wrong 
         flash("Oops, looks like there was a problem. Please try again!")
-        return render_template("update.html", c=c)
+        return render_template("customers.html", c=c)
 
 # Updating accounts
 # @bp.route('/update/<int:account_number>', methods = ['PATCH', 'PUT'])
