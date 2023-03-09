@@ -19,7 +19,7 @@ class Form(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     password = StringField("Password", widget=PasswordInput(hide_value=False),validators=[DataRequired()])
     # signed_agreement = RadioField("Signed Agreement", coerce=bool, choices=[(1, 'True'), (0, 'False')])
-    signed_agreement = BooleanField("Signed Agreement", default=False)
+    signed_agreement = BooleanField("Signed Agreement", default=False, validators=[DataRequired()]) # Change to check
     phonenumber = StringField("Phone Number", validators=[DataRequired()])
     email = StringField("Email")
     submit = SubmitField("Save")
