@@ -18,8 +18,8 @@ class Form(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     username = StringField("Username", validators=[DataRequired()])
     password = StringField("Password", widget=PasswordInput(hide_value=False),validators=[DataRequired()])
-    # signed_agreement = RadioField("Signed Agreement", coerce=bool, choices=[(1, 'True'), (0, 'False')])
-    signed_agreement = BooleanField("Signed Agreement", default=False, validators=[DataRequired()]) # Change to check
+    signed_agreement = RadioField("Signed Agreement", choices=[(True, 'Yes'), (False, 'No')], default=False)
+    # signed_agreement = BooleanField("Signed Agreement", default=False)
     phonenumber = StringField("Phone Number", validators=[DataRequired()])
     email = StringField("Email")
     submit = SubmitField("Save")
@@ -60,7 +60,7 @@ def create():
             name = form.name.data,
             username = form.username.data,
             password = form.password.data,
-            signed_agreement = form.signed_agreement.data,
+            signed_agreement = form.signed_agreement.data =="True",
             phonenumber = form.phonenumber.data,
             email = form.email.data
         )
@@ -82,48 +82,38 @@ def delete(account_number:int):
         return render_template("customers.html", c=c)
 
 # Updating accounts
-# @bp.route('/update/<int:account_number>', methods = ['PATCH', 'PUT'])
-# def update(account_number:int):
-#     c = Customer.query.get_or_404(account_number)
-#     if (
-#         'username' not in request.json and 
-#         'password' not in request.json and
-#         'phonenumber' not in request.json and 
-#         'email' not in request.json and
-#         'name' not in request.json and 
-#         'signed_agreement' not in request.json):
-#         return abort(400)
-
-#     if 'username' in request.json:
-#         if len(request.json['username']) < 3:
-#             return abort(400)
-#         c.username = request.json['username']
-#     if 'password' in request.json:
-#         if len(request.json['password']) < 8:
-#             return abort(400)
-#         c.password = scramble(request.json['password'])
-#     if 'phonenumber' in request.json:
-#         if len(request.json['phonenumber']) > 12 or len(request.json['phonenumber']) < 7:
-#             return abort(400)
-#         c.phonenumber = request.json['phonenumber']
-#     if 'email' in request.json:
-#         c.email = request.json['email']
-#     if 'name' in request.json:
-#         c.name = request.json['name']
-#     if 'signed_agreement' in request.json:
-#         c.signed_agreement = request.json['signed_agreement']
-
-#     # Next feature: Create a statement that allows you to change the account_number as long as
-#     # there is not another customer with the same account number
-
-#     try:
-#         db.session.commit()
-#         #return jsonify(c.serialize())
-#         #return render_template('view.html', c=c)
-#     except:
-#         return jsonify(False)
-
 #TODO: Not updating, also boolean field is not populating
+# @bp.route('/update/<int:account_number>', methods = ['GET', 'POST'])
+# def update(account_number:int):
+#     form = Form()
+#     c = Customer.query.get_or_404(account_number)
+
+#     if request.method == "POST" and form.validate_on_submit():
+#         if len(request.form['username']) < 3:
+#             return render_template('customers.html')
+#         c.username = request.form['username']
+#         if len(request.form['password']) < 8:
+#             return render_template('customers.html')
+#         c.password = request.form['password']
+#         if len(request.form['phonenumber']) > 12 or len(request.form['phonenumber']) < 7:
+#             return render_template('customers.html')
+#         c.phonenumber = request.form['phonenumber']
+#         c.email = request.form['email']
+#         c.name = request.form['name']
+#         c.signed_agreement = c.data['signed_agreement'] #request.form['signed_agreement']
+        
+#         try:
+#             db.session.add(c)
+#             db.session.commit()
+#             flash("Customer Updated Successfully!")
+#             return render_template('customers.index', form=form, c=c)
+#         except:
+#             db.session.rollback()
+#             flash("Oops, looks like there was a problem. Please try again!")
+#             return render_template("update.html", form=form, c=c)
+#     else:
+#         return render_template("update.html", form=form, c=c)
+
 @bp.route('/update/<int:account_number>', methods = ['GET', 'POST'])
 def update(account_number:int):
     form = Form()
@@ -141,10 +131,10 @@ def update(account_number:int):
         c.phonenumber = request.form['phonenumber']
         c.email = request.form['email']
         c.name = request.form['name']
-        # c.signed_agreement = request.form['signed_agreement']
+        c.signed_agreement = request.form['signed_agreement']
+        
         
         try:
-            db.session.add(c)
             db.session.commit()
             flash("Customer Updated Successfully!")
             return render_template('customers.index', form=form, c=c)

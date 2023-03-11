@@ -60,6 +60,13 @@
             <div class="form-check">
                 {{form.signed_agreement(class="form-control", value=c.signed_agreement)}}
             </div> -->
+            {{ form.signed_agreement.label }}
+            <div class="form-group">
+                {% for subfield in signed_agreement %}
+                {{subfield}}
+                {{subfield.label}}
+                {% endfor %}
+            </div>
             <!-- Phone number field -->
             <div class="form-group">
                 {{form.phonenumber.label()}}

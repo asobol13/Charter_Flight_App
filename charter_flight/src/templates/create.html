@@ -57,9 +57,16 @@
           {{form.password(class="form-control")}}
         </div>
         <!-- True/false boolean field -->
-        {{form.signed_agreement.label()}}
+        <!-- {{form.signed_agreement.label()}}
         <div class="form-group">
           {{form.signed_agreement(class="form-control")}}
+        </div> -->
+        {{form.signed_agreement.label()}}
+        <div class="form-group">
+          {% for subfield in form.signed_agreement %}
+              {{subfield}}
+              {{subfield.label}}
+          {% endfor %}
         </div>
         <!-- Phone number field -->
         <div class="form-group">
