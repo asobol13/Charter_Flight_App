@@ -83,37 +83,6 @@ def delete(account_number:int):
 
 # Updating accounts
 #TODO: Not updating, also boolean field is not populating
-# @bp.route('/update/<int:account_number>', methods = ['GET', 'POST'])
-# def update(account_number:int):
-#     form = Form()
-#     c = Customer.query.get_or_404(account_number)
-
-#     if request.method == "POST" and form.validate_on_submit():
-#         if len(request.form['username']) < 3:
-#             return render_template('customers.html')
-#         c.username = request.form['username']
-#         if len(request.form['password']) < 8:
-#             return render_template('customers.html')
-#         c.password = request.form['password']
-#         if len(request.form['phonenumber']) > 12 or len(request.form['phonenumber']) < 7:
-#             return render_template('customers.html')
-#         c.phonenumber = request.form['phonenumber']
-#         c.email = request.form['email']
-#         c.name = request.form['name']
-#         c.signed_agreement = c.data['signed_agreement'] #request.form['signed_agreement']
-        
-#         try:
-#             db.session.add(c)
-#             db.session.commit()
-#             flash("Customer Updated Successfully!")
-#             return render_template('customers.index', form=form, c=c)
-#         except:
-#             db.session.rollback()
-#             flash("Oops, looks like there was a problem. Please try again!")
-#             return render_template("update.html", form=form, c=c)
-#     else:
-#         return render_template("update.html", form=form, c=c)
-
 @bp.route('/update/<int:account_number>', methods = ['GET', 'POST'])
 def update(account_number:int):
     form = Form()
@@ -131,13 +100,13 @@ def update(account_number:int):
         c.phonenumber = request.form['phonenumber']
         c.email = request.form['email']
         c.name = request.form['name']
-        c.signed_agreement = request.form['signed_agreement']
-        
+        #c.signed_agreement = c.data['signed_agreement'] #request.form['signed_agreement']
         
         try:
+            db.session.add(c)
             db.session.commit()
             flash("Customer Updated Successfully!")
-            return render_template('customers.index', form=form, c=c)
+            return redirect(url_for('customers.index'))
         except:
             db.session.rollback()
             flash("Oops, looks like there was a problem. Please try again!")

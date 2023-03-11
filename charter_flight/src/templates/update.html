@@ -56,13 +56,13 @@
                 {{form.password(class="form-control", value=c.password)}}
             </div>
             <!-- True/false boolean field -->
-            {{form.signed_agreement.label()}}
+            <!-- {{form.signed_agreement.label()}}
             <div class="form-group">
                 {% for subfield in form.signed_agreement %}
-                    {{subfield(value='Yes')}}
+                    {{subfield}}
                     {{subfield.label}}
                 {% endfor %}
-            </div>
+            </div> -->
             <!-- Phone number field -->
             <div class="form-group">
                 {{form.phonenumber.label()}}
