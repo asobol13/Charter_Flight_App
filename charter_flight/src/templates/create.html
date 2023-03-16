@@ -63,10 +63,7 @@
         </div> -->
         {{form.signed_agreement.label()}}
         <div class="form-group">
-          {% for subfield in form.signed_agreement %}
-              {{subfield}}
-              {{subfield.label}}
-          {% endfor %}
+          {{form.signed_agreement()}}
         </div>
         <!-- Phone number field -->
         <div class="form-group">

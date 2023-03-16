@@ -19,7 +19,7 @@ class Form(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     password = StringField("Password", widget=PasswordInput(hide_value=False),validators=[DataRequired()])
     # signed_agreement = RadioField("Signed Agreement", choices=[(True, 'Yes'), (False, 'No')], default=False)
-    signed_agreement = BooleanField("Signed Agreement", default=False)
+    signed_agreement = BooleanField("Signed Agreement")
     phonenumber = StringField("Phone Number", validators=[DataRequired()])
     email = StringField("Email")
     submit = SubmitField("Save")
@@ -88,20 +88,36 @@ def update(account_number:int):
     form = Form()
     c = Customer.query.get_or_404(account_number)
 
+    # if request.method == "POST" and form.validate_on_submit():
+    #     if len(request.form['username']) < 3:
+    #         return render_template('customers.html')
+    #     c.username = request.form['username']
+    #     if len(request.form['password']) < 8:
+    #         return render_template('customers.html')
+    #     c.password = request.form['password']
+    #     if len(request.form['phonenumber']) > 12 or len(request.form['phonenumber']) < 7:
+    #         return render_template('customers.html')
+    #     c.phonenumber = request.form['phonenumber']
+    #     c.email = request.form['email']
+    #     c.name = request.form['name']
+    #     c.signed_agreement = request.form['signed_agreement']
+
     if request.method == "POST" and form.validate_on_submit():
         if len(request.form['username']) < 3:
-            return render_template('customers.html')
+            return abort(400)
         c.username = request.form['username']
         if len(request.form['password']) < 8:
-            return render_template('customers.html')
+            return abort(400)
         c.password = request.form['password']
         if len(request.form['phonenumber']) > 12 or len(request.form['phonenumber']) < 7:
-            return render_template('customers.html')
+            return abort(400)
         c.phonenumber = request.form['phonenumber']
         c.email = request.form['email']
         c.name = request.form['name']
         c.signed_agreement = request.form['signed_agreement']
-
+        db.session.add(c)
+        db.session.commit()
+        return redirect(url_for('customers.index'))
         
         try:
             db.session.add(c)
