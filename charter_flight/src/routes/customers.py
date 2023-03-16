@@ -18,7 +18,7 @@ class Form(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     username = StringField("Username", validators=[DataRequired()])
     password = StringField("Password", widget=PasswordInput(hide_value=False),validators=[DataRequired()])
-    # signed_agreement = RadioField("Signed Agreement", choices=[(True, 'Yes'), (False, 'No')], default=False)
+    #signed_agreement = RadioField("Signed Agreement", choices=[(True, 'Yes'), (False, 'No')])
     signed_agreement = BooleanField("Signed Agreement")
     phonenumber = StringField("Phone Number", validators=[DataRequired()])
     email = StringField("Email")
@@ -128,5 +128,4 @@ def update(account_number:int):
             db.session.rollback()
             flash("Oops, looks like there was a problem. Please try again!")
             return render_template("update.html", form=form, c=c)
-    else:
-        return render_template("update.html", form=form, c=c)
+    return render_template("update.html", form=form, c=c)
