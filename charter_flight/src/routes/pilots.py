@@ -1,74 +1,86 @@
-from flask import Blueprint, jsonify, abort, request
+from flask import Blueprint, jsonify, abort, request, render_template, url_for, redirect, flash
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, RadioField
+from wtforms.widgets import PasswordInput
+from wtforms.validators import DataRequired
 from ..models import Pilot, db
+
+#Create a Form Class
+class Form(FlaskForm):
+    pilot_name = StringField("Name", validators=[DataRequired()])
+    hourly_rate = StringField("Hourly Rate", validators=[DataRequired()])
+    wait_time_rate = StringField("Wait Time Rate", validators=[DataRequired()])
+    submit = SubmitField("Save")
 
 # Creating blueprint
 bp = Blueprint('pilots', __name__, url_prefix='/pilots')
 
 # Index of pilots
-@bp.route('', methods=['GET'])
+@bp.route('/', methods=['GET'])
 def index():
     pilots = Pilot.query.all()
     result = []
     for p in pilots:
         result.append(p.serialize())
-    return jsonify(result)
+    return render_template('pilots.html', result=result)
 
 # Showing pilots
-@bp.route('/<int:pilot_id>', methods=['GET'])
+@bp.route('/view/<int:pilot_id>', methods=['GET'])
 def show(pilot_id:int):
     p = Pilot.query.get_or_404(pilot_id)
-    return jsonify(p.serialize())
+    return render_template('showpilots.html', p=p)
 
 # Adding new pilots
-@bp.route('', methods=['POST'])
+@bp.route('/create', methods=['POST', 'GET'])
 def create():
+    form = Form()
     # Construct pilot account
-    p = Pilot(
-        #pilot_id = request.json['pilot_id'],
-        pilot_name = request.json['pilot_name'],
-        hourly_rate = request.json['hourly_rate'],
-        wait_time_rate = request.json['wait_time_rate']
-    )
-    db.session.add(p) # Preparing create statement
-    db.session.commit() # Executing create statement
-    return jsonify(p.serialize())
+    if form.validate_on_submit():
+        p = Pilot(
+            #pilot_id = request.json['pilot_id'],
+            pilot_name = request.form['pilot_name'],
+            hourly_rate = request.form['hourly_rate'],
+            wait_time_rate = request.form['wait_time_rate']
+        )
+        db.session.add(p) # Preparing create statement
+        db.session.commit() # Executing create statement
+        return redirect(url_for('pilots.index'))
+    return render_template('createpilots.html', form=form)
 
 # Deleting pilots
-@bp.route('/<int:pilot_id>', methods = ['DELETE'])
+@bp.route('/delete/<int:pilot_id>', methods = ['POST', 'GET'])
 def delete(pilot_id:int):
     p = Pilot.query.get_or_404(pilot_id)
     try:
         db.session.delete(p) # prepare delete statement
         db.session.commit() # execute delete statement
-        return jsonify(True)
+        return redirect(url_for('pilots.index'))
     except:
         # something went wrong
-        return jsonify(False)
+        flash("Oops, looks like there was a problem. Please try again!")
+        return render_template("pilots.html", p=p)
 
 # Updating pilots
-@bp.route('/<int:pilot_id>', methods = ['PATCH', 'PUT'])
+@bp.route('/update/<int:pilot_id>', methods = ['GET', 'POST'])
 def update(pilot_id:int):
+    form = Form()
     p = Pilot.query.get_or_404(pilot_id)
-    if (
-        'pilot_id' not in request.json and 
-        'pilot_name' not in request.json and
-        'hourly_rate' not in request.json and 
-        'wait_time_rate' not in request.json):
-        return abort(400)
 
-    if 'pilot_name' in request.json:
-        p.pilot_name = request.json['pilot_name']
-    if 'hourly_rate' in request.json:
-        p.hourly_rate = request.json['hourly_rate']
-    if 'wait_time_rate' in request.json:
-        p.wait_time_rate = request.json['wait_time_rate']
-
+    if request.method == "POST" and form.validate_on_submit():
+        p.pilot_name = request.form['pilot_name']
+        p.hourly_rate = request.form['hourly_rate']
+        p.wait_time_rate = request.form['wait_time_rate']
 
     # Next feature: Create a statement that allows you to change the pilot_id as long as
     # there is not another pilot with the same id number
 
-    try:
-        db.session.commit()
-        return jsonify(p.serialize())
-    except:
-        return jsonify(False)
+        try:
+            db.session.add(p)
+            db.session.commit()
+            flash("Pilot Updated Successfully!")
+            return redirect(url_for('pilots.index'))
+        except:
+            db.session.rollback()
+            flash("Oops, looks like there was a problem. Please try again!")
+            return render_template("updatepilots.html", form=form, p=p)
+    return render_template("updatepilots.html", form=form, p=p)

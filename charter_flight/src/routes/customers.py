@@ -82,7 +82,6 @@ def delete(account_number:int):
         return render_template("customers.html", c=c)
 
 # Updating accounts
-#TODO: Not updating, also boolean field is not populating
 @bp.route('/update/<int:account_number>', methods = ['GET', 'POST'])
 def update(account_number:int):
     form = Form()

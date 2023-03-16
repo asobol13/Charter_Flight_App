@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <!-- Adding meta elements-->
+    <meta charset="UTF-8">
+    <meta name="description" content="Charter">
+    <meta name="author" content="Allison Sobol">
+    <meta name="viewport"
+    content="width=device-width,
+    initial-scale=1.0">
+    <title>Pilots Update Page</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </head>
+<body>
+    <header class="nav-bar">
+    <div class="menu-item">
+      <a href="/">Home</a>
+    </div>
+    <div class="menu-item">
+      <a href="/customers">Customers</a>
+    </div>
+    <div class="menu-item">
+        <a href="/charters">Charters</a>
+    </div>
+    <div class = "menu-item">
+      <a href="/pilots">Pilots</a>
+    </div>
+    <div class="menu-item">
+        <a href="/aircrafts">Aircrafts</a>
+    </div>
+    </header>
+    <h1>Update Pilots</h1>
+
+    <div class="container" text-center>
+        <form action="/pilots/update/{{p.pilot_id}}" method="POST">
+            {{form.hidden_tag()}}
+            <!-- Name field -->
+            <div class="form-group">
+                {{form.pilot_name.label()}}
+                {{form.pilot_name(class="form-control", value=p.pilot_name)}}
+            </div>
+            <!-- Username field -->
+            <div class="form-group">
+                {{form.hourly_rate.label()}}
+                {{form.hourly_rate(class="form-control", value=p.hourly_rate)}}
+            </div>
+            <!-- Password field -->
+            <div class="form-group">
+                {{form.wait_time_rate.label()}}
+                {{form.wait_time_rate(class="form-control", value=p.wait_time_rate)}}
+            </div>
+            <!-- Submit button -->
+            <div class="container">
+                {{form.submit(class="btn btn-primary m-5")}}
+            </div>
+        </form>
+    </div>
+</body>
+</html>

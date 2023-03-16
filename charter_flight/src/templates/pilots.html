@@ -10,7 +10,17 @@
         initial-scale=1.0">
         <title>Pilots Page</title>
         <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <!-- This is the javascript for the view, delete and update options -->
+        <script>
+          $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+          });
+        </script>
     </head>
 <body>
     <header class="nav-bar">
@@ -30,8 +40,47 @@
             <a href="aircrafts/">Aircrafts</a>
         </div>
     </header>
-    <div class="button">
-        <button type="button">Button</button>
+    <h1>Pilots</h1>
+    <h4>TODO: Styling</h4>
+
+    <div class="container">
+        <table class="table table-hover">
+            <div class="search-box">
+                <input type="text" class="form-control" id="mySearch" placeholder="Search&hellip;">
+            </div>
+            <a class="btn btn-primary" href="/pilots/create" role="button" id="createButton">+ Create</a>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">name</th>
+                    <th scope="col">hourly rate</th>
+                    <th scope="col">wait time rate</th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+            {% for result in result %}
+            <tr>
+                <td scope="row">{{result.pilot_id}}</td>
+                <td scope="row">{{result.pilot_name}}</td>
+                <td scope="row">{{result.hourly_rate}}</td>
+                <td scope="row">{{result.wait_time_rate}}</td>
+                <td scope="row"><a href="view/{{result.pilot_id}}" class="View" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+                <a href="update/{{result.pilot_id}}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                <a href="delete/{{result.pilot_id}}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
+    <script>
+        $(document).ready(function(){
+            $("#mySearch").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 </body>
 </html>
