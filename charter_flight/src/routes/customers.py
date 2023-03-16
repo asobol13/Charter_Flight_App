@@ -18,8 +18,8 @@ class Form(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     username = StringField("Username", validators=[DataRequired()])
     password = StringField("Password", widget=PasswordInput(hide_value=False),validators=[DataRequired()])
-    signed_agreement = RadioField("Signed Agreement", choices=[(True, 'Yes'), (False, 'No')], default=False)
-    # signed_agreement = BooleanField("Signed Agreement", default=False)
+    # signed_agreement = RadioField("Signed Agreement", choices=[(True, 'Yes'), (False, 'No')], default=False)
+    signed_agreement = BooleanField("Signed Agreement", default=False)
     phonenumber = StringField("Phone Number", validators=[DataRequired()])
     email = StringField("Email")
     submit = SubmitField("Save")
@@ -60,7 +60,7 @@ def create():
             name = form.name.data,
             username = form.username.data,
             password = form.password.data,
-            signed_agreement = form.signed_agreement.data =="True",
+            signed_agreement = form.signed_agreement.data,
             phonenumber = form.phonenumber.data,
             email = form.email.data
         )
@@ -100,7 +100,8 @@ def update(account_number:int):
         c.phonenumber = request.form['phonenumber']
         c.email = request.form['email']
         c.name = request.form['name']
-        #c.signed_agreement = c.data['signed_agreement'] #request.form['signed_agreement']
+        c.signed_agreement = request.form['signed_agreement']
+
         
         try:
             db.session.add(c)

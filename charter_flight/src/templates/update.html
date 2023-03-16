@@ -56,13 +56,23 @@
                 {{form.password(class="form-control", value=c.password)}}
             </div>
             <!-- True/false boolean field -->
-            <!-- {{form.signed_agreement.label()}}
             <div class="form-group">
-                {% for subfield in form.signed_agreement %}
-                    {{subfield}}
-                    {{subfield.label}}
-                {% endfor %}
-            </div> -->
+                {{form.signed_agreement.label()}}
+                {{form.signed_agreement(class="form-control", checked=c.signed_agreement)}}
+            </div>
+            <!-- <tr>
+                <td>{{form.signed_agreement.label()}}</td>
+                <td>
+                    Yes <input type="radio" name="signed_agreement" value=True
+                    {% if c.signed_agreement==True %}
+                        checked
+                    {% endif %} />
+                    No <input type="radio" name="signed_agreement" value=False
+                    {% if c.signed_agreement==False %}
+                        checked
+                    {% endif %} />
+                </td>
+            </tr> -->
             <!-- Phone number field -->
             <div class="form-group">
                 {{form.phonenumber.label()}}
