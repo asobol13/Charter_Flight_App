@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, abort, request, render_template, url_for, redirect, flash
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, RadioField
+from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from ..models import Pilot, db
 
