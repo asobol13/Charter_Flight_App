@@ -1,7 +1,6 @@
 from flask import Blueprint, jsonify, abort, request, render_template, url_for, redirect, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, RadioField
-from wtforms.widgets import PasswordInput
 from wtforms.validators import DataRequired
 from ..models import Pilot, db
 
@@ -75,8 +74,8 @@ def update(pilot_id:int):
     # there is not another pilot with the same id number
 
         try:
-            db.session.add(p)
-            db.session.commit()
+            db.session.add(p) # Preparing to update statement
+            db.session.commit() # Executing update statement
             flash("Pilot Updated Successfully!")
             return redirect(url_for('pilots.index'))
         except:

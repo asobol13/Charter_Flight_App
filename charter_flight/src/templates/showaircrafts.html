@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <!-- Adding meta elements-->
+    <meta charset="UTF-8">
+    <meta name="description" content="Charter">
+    <meta name="author" content="Allison Sobol">
+    <meta name="viewport"
+    content="width=device-width,
+    initial-scale=1.0">
+    <title>Aircrafts View Page</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </head>
+<body>
+  <header class="nav-bar">
+    <div class="menu-item">
+      <a href="/">Home</a>
+    </div>
+    <div class="menu-item">
+      <a href="/customers">Customers</a>
+    </div>
+    <div class="menu-item">
+        <a href="/charters">Charters</a>
+    </div>
+    <div class = "menu-item">
+      <a href="/pilots">Pilots</a>
+    </div>
+    <div class="menu-item">
+      <a href="/aircrafts">Aircrafts</a>
+    </div>
+  </header>
+  <h1>Aircraft View</h1>
+  <h4>TODO: Photo Option?</h4>
+  <h4>Styling</h4>
+  <h4>Tie in charters/pilots/aircrafts?</h4>
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          {{a.tail_number}}
+        </div>
+        <ul class="list-group-item">
+          <li class="list-group-item">Aicraft Name: {{a.aircraft_name}}</li>
+          <li class="list-group-item">Hourly Rate: {{a.hourly_rate}}</li>
+          <li class="list-group-item">Wait Time Rate: {{a.wait_time_rate}}</li>
+          <li class="list-group-item">Capacity: {{a.capacity}}</li>
+          <li class="list-group-item">Maintenance Date: {{a.maintenance_date}}</li>
+          <li class="list-group-item">Fuel Load: {{a.fuel_load}}</li>
+          <li class="list-group-item">Fuel Type: {{a.fuel_type}}</li>
+          <li class="list-group-item">Aircraft Notes: {{a.aircraft_notes}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container">
+      <a class="btn btn-primary" href="/aircrafts/update/{{a.tail_number}}" role="button" id="updatebutton">Update</a>
+    </div>
+    <div class="container">
+      <a class="btn btn-primary" href="/aircrafts/delete/{{a.tailnumber}}" role="button" id="deletebutton">Delete</a>
+    </div>
+</body>
+</html>

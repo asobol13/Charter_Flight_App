@@ -55,6 +55,7 @@
             <th scope="col">capacity</th>
             <th scope="col">maintenance</th>
             <th scope="col">fuel load</th>
+            <th scope="col">fuel type</th>
             <th scope="col">notes</th>
             <th scope="col">actions</th>
           </tr>
@@ -69,6 +70,7 @@
               <td scope="row">{{result.capacity}}</td>
               <td scope="row">{{result.maintenance_date}}</td>
               <td scope="row">{{result.fuel_load}}</td>
+              <td scope="row">{{result.fuel_type}}</td>
               <td scope="row">{{result.aircraft_notes}}</td>
               <td scope="row"><a href="view/{{result.tail_number}}" class="View" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
               <a href="update/{{result.tail_number}}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>

@@ -105,8 +105,8 @@ def update(account_number:int):
             c.signed_agreement = False
         
         try:
-            db.session.add(c)
-            db.session.commit()
+            db.session.add(c) # Preparing to update statement
+            db.session.commit() # Executing update statement
             flash("Customer Updated Successfully!")
             return redirect(url_for('customers.index'))
         except:
