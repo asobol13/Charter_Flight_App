@@ -60,19 +60,19 @@
         </thead>
         <tbody id="myTable">
           {% for result in result %}
-            <tr>
-              <td scope="row">{{result.account_number}}</td>
-              <td scope="row">{{result.name}}</td>
-              <td scope="row">{{result.username}}</td>
-              <td scope="row">{{result.password}}</td>
-              <td scope="row">{{result.signed_agreement}}</td>
-              <td scope="row">{{result.phonenumber}}</td>
-              <td scope="row">{{result.email}}</td>
-              <td scope="row"><a href="view/{{result.account_number}}" class="View" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-              <a href="update/{{result.account_number}}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-              <a href="delete/{{result.account_number}}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a></td>
+          <tr>
+            <td scope="row">{{result.account_number}}</td>
+            <td scope="row">{{result.name}}</td>
+            <td scope="row">{{result.username}}</td>
+            <td scope="row">{{result.password}}</td>
+            <td scope="row">{{result.signed_agreement}}</td>
+            <td scope="row">{{result.phonenumber}}</td>
+            <td scope="row">{{result.email}}</td>
+            <td scope="row"><a href="view/{{result.account_number}}" class="View" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+            <a href="update/{{result.account_number}}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+            <a href="delete/{{result.account_number}}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a></td>
           </tr>
-        {% endfor %}
+          {% endfor %}
         </tbody>
       </table>
     </div>

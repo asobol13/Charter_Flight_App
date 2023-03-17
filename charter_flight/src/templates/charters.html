@@ -63,22 +63,22 @@
         </thead>
         <tbody id="myTable">
           {% for result in result %}
-            <tr>
-              <td scope="row">{{result.charter_number}}</td>
-              <td scope="row">{{result.departure_airport}}</td>
-              <td scope="row">{{result.destination_airport}}</td>
-              <td scope="row">{{result.departure_date}}</td>
-              <td scope="row">{{result.return_date}}</td>
-              <td scope="row">{{result.departure_time}}</td>
-              <td scope="row">{{result.return_time}}</td>
-              <td scope="row">{{result.wait_hours}}</td>
-              <td scope="row">{{result.flight_hours}}</td>
-              <td scope="row">{{result.number_pax}}</td>
-              <td scope="row"><a href="view/{{result.charter_number}}" class="View" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-              <a href="update/{{result.charter_number}}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-              <a href="delete/{{result.charter_number}}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a></td>
+          <tr>
+            <td scope="row">{{result.charter_number}}</td>
+            <td scope="row">{{result.departure_airport}}</td>
+            <td scope="row">{{result.destination_airport}}</td>
+            <td scope="row">{{result.departure_date}}</td>
+            <td scope="row">{{result.return_date}}</td>
+            <td scope="row">{{result.departure_time}}</td>
+            <td scope="row">{{result.return_time}}</td>
+            <td scope="row">{{result.wait_hours}}</td>
+            <td scope="row">{{result.flight_hours}}</td>
+            <td scope="row">{{result.number_pax}}</td>
+            <td scope="row"><a href="view/{{result.charter_number}}" class="View" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+            <a href="update/{{result.charter_number}}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+            <a href="delete/{{result.charter_number}}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a></td>
           </tr>
-        {% endfor %}
+          {% endfor %}
         </tbody>
       </table>
     </div>

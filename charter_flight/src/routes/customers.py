@@ -19,7 +19,6 @@ class Form(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     password = StringField("Password", widget=PasswordInput(hide_value=False),validators=[DataRequired()])
     signed_agreement = RadioField("Signed Agreement", choices=[(True, "Yes"), (False, "No")])
-    #signed_agreement = BooleanField("Signed Agreement")
     phonenumber = StringField("Phone Number", validators=[DataRequired()])
     email = StringField("Email")
     submit = SubmitField("Save")
@@ -47,9 +46,6 @@ def show(account_number:int):
 def create():
     form = Form()
 
-#     # Request body must contain username, password and phone number
-#     if 'username' not in request.json or 'password' not in request.json or 'phonenumber' not in request.json:
-#         return redirect(url_for('index.html'))
 #     if len(request.json['username']) < 3 or len(request.json['password']) < 8:
 #         #return abort(400)
 #         return redirect(url_for('index.html'))

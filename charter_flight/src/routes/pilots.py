@@ -36,7 +36,6 @@ def create():
     # Construct pilot account
     if form.validate_on_submit():
         p = Pilot(
-            #pilot_id = request.json['pilot_id'],
             pilot_name = request.form['pilot_name'],
             hourly_rate = request.form['hourly_rate'],
             wait_time_rate = request.form['wait_time_rate']
