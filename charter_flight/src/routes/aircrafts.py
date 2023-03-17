@@ -1,17 +1,21 @@
-from flask import Blueprint, jsonify, abort, request
+from flask import Blueprint, jsonify, abort, request, render_template, url_for, redirect, flash
+from flask_wtf import FlaskForm
+from wtforms import StringField, BooleanField, SubmitField, RadioField
+from wtforms.widgets import PasswordInput
+from wtforms.validators import DataRequired
 from ..models import Aircraft, db
 
 # Creating blueprint
 bp = Blueprint('aircrafts', __name__, url_prefix='/aircrafts')
 
 # Index of aircrafts
-@bp.route('', methods=['GET'])
+@bp.route('/', methods=['GET'])
 def index():
     aircrafts = Aircraft.query.all()
     result = []
     for a in aircrafts:
         result.append(a.serialize())
-    return jsonify(result)
+    return render_template('aircrafts.html', result=result)
 
 # Showing aircrafts
 @bp.route('<tail_number>', methods=['GET'])

@@ -1,34 +1,92 @@
 <!DOCTYPE html>
 <html lang="en-US">
-    <head>
-        <!-- Adding meta elements-->
-        <meta charset="UTF-8">
-        <meta name="description" content="Charter">
-        <meta name="author" content="Allison Sobol">
-        <meta name="viewport"
-        content="width=device-width,
-        initial-scale=1.0">
-        <title>Aircrafts Page</title>
-        <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    </head>
+  <head>
+    <!-- Adding meta elements-->
+    <meta charset="UTF-8">
+    <meta name="description" content="Charter">
+    <meta name="author" content="Allison Sobol">
+    <meta name="viewport"
+    content="width=device-width,
+    initial-scale=1.0">
+    <title>Aircrafts Page</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- This is the javascript for the view, delete and update options -->
+    <script>
+      $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+  </head>
 <body>
     <header class="nav-bar">
         <div class="menu-item">
             <a href="/">Home</a>
         </div>
         <div class="menu-item">
-            <a href="customers/">Customers</a>
+            <a href="/customers/">Customers</a>
         </div>
         <div class="menu-item">
-            <a href="charters/">Charters</a>
+            <a href="/charters/">Charters</a>
         </div>
         <div class = "menu-item">
-            <a href="pilots/">Pilots</a>
-        </div>
-        <div class="menu-item">
-            <a href="aircrafts/">Aircrafts</a>
+            <a href="/pilots/">Pilots</a>
         </div>
     </header>
+    <h1>Aircrafts</h1>
+    <h4>TODO: Styling</h4>
+    
+    <div class="container">
+      <table class="table table-hover">
+        <div class="search-box">
+          <input type="text" class="form-control" id="mySearch" placeholder="Search&hellip;">
+        </div>
+        <a class="btn btn-primary" href="/aircrafts/create" role="button" id="createButton">+ Create</a>
+        <thead>
+          <tr>
+            <th scope="col">tail number</th>
+            <th scope="col">name</th>
+            <th scope="col">hourly rate</th>
+            <th scope="col">wait time rate</th>
+            <th scope="col">capacity</th>
+            <th scope="col">maintenance</th>
+            <th scope="col">fuel load</th>
+            <th scope="col">notes</th>
+            <th scope="col">actions</th>
+          </tr>
+        </thead>
+        <tbody id="myTable">
+          {% for result in result %}
+            <tr>
+              <td scope="row">{{result.tail_number}}</td>
+              <td scope="row">{{result.aircraft_name}}</td>
+              <td scope="row">{{result.hourly_rate}}</td>
+              <td scope="row">{{result.wait_time_rate}}</td>
+              <td scope="row">{{result.capacity}}</td>
+              <td scope="row">{{result.maintenance_date}}</td>
+              <td scope="row">{{result.fuel_load}}</td>
+              <td scope="row">{{result.aircraft_notes}}</td>
+              <td scope="row"><a href="view/{{result.tail_number}}" class="View" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+              <a href="update/{{result.tail_number}}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+              <a href="delete/{{result.tail_number}}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <script>
+      $(document).ready(function(){
+        $("#mySearch").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        });
+      });
+      </script>
 </body>
 </html>
