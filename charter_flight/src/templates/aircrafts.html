@@ -37,15 +37,17 @@
             <a href="/pilots/">Pilots</a>
         </div>
     </header>
-    <h1>Aircrafts</h1>
-    <h4>TODO: Styling</h4>
-    
+
+    <div class="container" id="pageheading">
+      <h1>Aircrafts</h1>
+    </div>
+
     <div class="container">
       <table class="table table-hover">
+        <a class="btn btn-primary" href="/aircrafts/create" role="button" id="createButton">+ Create</a>
         <div class="search-box">
           <input type="text" class="form-control" id="mySearch" placeholder="Search&hellip;">
         </div>
-        <a class="btn btn-primary" href="/aircrafts/create" role="button" id="createButton">+ Create</a>
         <thead>
           <tr>
             <th scope="col">tail number</th>
